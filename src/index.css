@@ -32,3 +32,11 @@ body {
     transform: scale(1.5) rotateY(360deg);
   }
 }
+
+.ant-menu-item-selected {
+  background-color: var(--clr-gold) !important;
+}
+
+.navbar-menu > li {
+  padding: 25px !important;
+}

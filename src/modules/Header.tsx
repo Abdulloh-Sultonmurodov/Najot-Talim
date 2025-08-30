@@ -1,0 +1,79 @@
+import {
+  BellOutlined,
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from "@ant-design/icons";
+import { Badge, Button, Modal } from "antd";
+import { useState, type Dispatch, type FC, type SetStateAction } from "react";
+import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
+
+const Header: FC<{
+  collapse: boolean;
+  setCollapse: Dispatch<SetStateAction<boolean>>;
+}> = ({ collapse, setCollapse }) => {
+  const [, , removeCookies] = useCookies(["accessToken"]);
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  function handleLogOut() {
+    setLoading(true);
+    toast.success("Chiqib ketyabsiz...", {
+      onClose: () => {
+        setLoading(false);
+        removeCookies("accessToken");
+        location.pathname = "/";
+      },
+      autoClose: 2000,
+    });
+  }
+
+  return (
+    <div className="flex items-center p-[15px] justify-between bg-[#001529]">
+      <button
+        onClick={() => setCollapse(!collapse)}
+        className="text-white cursor-pointer"
+      >
+        {collapse ? (
+          <MenuUnfoldOutlined className="!text-[25px]" />
+        ) : (
+          <MenuFoldOutlined className="!text-[25px]" />
+        )}
+      </button>
+      <div className="flex items-center gap-[20px]">
+        <Badge size="default" overflowCount={10} count={11}>
+          <Button
+            size="large"
+            icon={<BellOutlined className="!text-[22px]" />}
+          ></Button>
+        </Badge>
+        <Button
+          onClick={() => setShowModal(true)}
+          className="!text-white hover:scale-[1.1] duration-300"
+          iconPosition="end"
+          icon={<LogoutOutlined />}
+          size="large"
+          type="text"
+        >
+          Chiqish
+        </Button>
+      </div>
+      <Modal
+        cancelText={"Bekor qilish"}
+        okText={"Chiqish"}
+        okButtonProps={{ type: "primary", className: "!bg-[#bc8e5b]" }}
+        confirmLoading={loading}
+        open={showModal}
+        onCancel={() => setShowModal(false)}
+        title="Tizimdan chiqish"
+        onOk={handleLogOut}
+      >
+        <p>Tizimdan chiqsangiz qaytib kira olmaysiz, o'ylab ish qiling 😂</p>
+      </Modal>
+    </div>
+  );
+};
+
+export default Header;
