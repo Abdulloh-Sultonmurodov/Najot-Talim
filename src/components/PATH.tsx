@@ -5,6 +5,7 @@ const PATH = {
   teachers: "/teachers",
   students: "/students",
   stacks: "/stacks",
+  stacksCreate: "/stacks/create",
 };
 
 export default PATH;

@@ -63,7 +63,7 @@ const Navbar: FC<{ collapse: boolean }> = ({ collapse }) => {
     <div
       className={`${
         collapse ? "w-[80px]" : "w-[18%]"
-      } duration-200 h-[100vh] bg-[#001529]`}
+      } duration-200 h-[100vh] overflow-y-auto bg-[#001529]`}
     >
       <div className="p-3 border-b-[1px] mb-[10px] flex items-center gap-[10px] border-white text-[#bc8e5e]">
         <LogoIcon classList="!w-[70px]" />
