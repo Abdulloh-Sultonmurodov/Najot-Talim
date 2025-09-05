@@ -5,6 +5,7 @@ import {
   Groups,
   Stacks,
   StacksCreate,
+  StacksMore,
   Students,
   Teachers,
 } from "../pages";
@@ -21,6 +22,8 @@ const DashboardRoutes = () => {
     { id: 4, path: PATH.students, element: <Students /> },
     { id: 5, path: PATH.home, element: <DashboardHome /> },
     { id: 6, path: PATH.stacksCreate, element: <StacksCreate /> },
+    { id: 7, path: PATH.stacksUpdate, element: <StacksCreate /> },
+    { id: 8, path: PATH.stacksMore, element: <StacksMore /> },
   ];
 
   return (
