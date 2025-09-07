@@ -62,6 +62,7 @@ const StacksMore = () => {
   }, []);
 
   //   Shu Stackdagi guruxlar
+  const [groupsLoading, setGroupsLoading] = useState<boolean>(true);
   const [stackGroup, setStackGroup] = useState([]);
   const column = [
     { title: "ID", dataIndex: "id" },
@@ -85,14 +86,15 @@ const StacksMore = () => {
                 size="middle"
                 icon={<MoreOutlined className="!text-[18px]" />}
                 type="primary"
-                className="!bg-[#bc8e5b] !p-0"
+                className="!bg-[#bc8e5b] !p-0 translate-y-[2px]"
               ></Button>
             );
             return item;
           })
         );
+        setGroupsLoading(false);
       });
-  });
+  }, []);
 
   return (
     <div className="p-5">
@@ -148,7 +150,11 @@ const StacksMore = () => {
         />
       </div>
       <div className="mt-[40px]">
-        <CustomTable columns={column} data={stackGroup} />
+        <CustomTable
+          loading={groupsLoading}
+          columns={column}
+          data={stackGroup}
+        />
       </div>
       <Modal
         confirmLoading={deleteLoading}

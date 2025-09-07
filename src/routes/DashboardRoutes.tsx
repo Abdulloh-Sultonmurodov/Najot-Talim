@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { PATH } from "../components";
 import {
   DashboardHome,
+  GroupCreate,
   Groups,
   Stacks,
   StacksCreate,
@@ -24,6 +25,7 @@ const DashboardRoutes = () => {
     { id: 6, path: PATH.stacksCreate, element: <StacksCreate /> },
     { id: 7, path: PATH.stacksUpdate, element: <StacksCreate /> },
     { id: 8, path: PATH.stacksMore, element: <StacksMore /> },
+    { id: 9, path: PATH.groupsCreate, element: <GroupCreate /> },
   ];
 
   return (

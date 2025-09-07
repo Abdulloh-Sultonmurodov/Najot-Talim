@@ -46,3 +46,7 @@ body {
   width: 400px !important;
   height: 200px !important;
 }
+
+.ant-spin-dot {
+  color: var(--clr-gold) !important;
+}
