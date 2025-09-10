@@ -82,10 +82,10 @@ const Groups = () => {
       .get("/stacks")
       .then((res) => {
         setStacks(
-          res.data.data.map((item: StackType) => {
-            item.label = item.name;
-            item.value = item.id;
-          })
+          res.data.data.map((item: StackType) => ({
+            label: item.name,
+            value: item.id,
+          }))
         );
       })
       .finally(() => {
@@ -131,7 +131,7 @@ const Groups = () => {
           showSearch
           placeholder="Yo'nalish tanlang"
           optionFilterProp="label"
-          options={[stacks]}
+          options={stacks}
         />
         <Select
           onChange={handleChooseTeacher}
@@ -141,7 +141,7 @@ const Groups = () => {
           showSearch
           placeholder="Ustoz tanlang"
           optionFilterProp="label"
-          options={[teachers]}
+          options={teachers}
         />
       </div>
       <div className="mt-5">

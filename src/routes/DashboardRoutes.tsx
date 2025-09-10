@@ -7,7 +7,11 @@ import {
   Stacks,
   StacksCreate,
   StacksMore,
+  StudentCreate,
+  StudentMore,
   Students,
+  TeacherCreate,
+  TeacherMore,
   Teachers,
 } from "../pages";
 import { Header, Navbar } from "../modules";
@@ -26,12 +30,22 @@ const DashboardRoutes = () => {
     { id: 7, path: PATH.stacksUpdate, element: <StacksCreate /> },
     { id: 8, path: PATH.stacksMore, element: <StacksMore /> },
     { id: 9, path: PATH.groupsCreate, element: <GroupCreate /> },
+    { id: 10, path: PATH.studentsCreate, element: <StudentCreate /> },
+    { id: 11, path: PATH.studentsMore, element: <StudentMore /> },
+    { id: 12, path: PATH.studentsUpdate, element: <StudentCreate /> },
+    { id: 13, path: PATH.teachersCreate, element: <TeacherCreate /> },
+    { id: 14, path: PATH.teachersUpdate, element: <TeacherCreate /> },
+    { id: 15, path: PATH.teachersMore, element: <TeacherMore /> },
   ];
 
   return (
     <div className="flex">
       <Navbar collapse={collapse} />
-      <div className={`${collapse ? "w-full" : "w-[82%]"}`}>
+      <div
+        className={`${
+          collapse ? "w-full" : "w-[82%]"
+        } overflow-y-auto h-[100vh]`}
+      >
         <Header setCollapse={setCollapse} collapse={collapse} />
         <Routes>
           {routeList.map((item) => (

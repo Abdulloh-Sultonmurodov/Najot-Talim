@@ -3,8 +3,14 @@ import { lazy } from "react";
 const Login = lazy(() => import("./auth/Login"));
 import LoginHome from "./auth/LoginHome";
 import DashboardHome from "./dashboard/DashboardHome";
-import Teachers from "./dashboard/Teachers";
-import Students from "./dashboard/Students";
+
+import Students from "./dashboard/students/Students";
+import StudentCreate from "./dashboard/students/StudentCreate";
+import StudentMore from "./dashboard/students/StudentMore";
+
+import Teachers from "./dashboard/teachers/Teachers";
+import TeacherCreate from "./dashboard/teachers/TeacherCreate";
+import TeacherMore from "./dashboard/teachers/TeacherMore";
 
 import Groups from "./dashboard/groups/Groups";
 import GroupCreate from "./dashboard/groups/GroupCreate";
@@ -24,4 +30,8 @@ export {
   StacksCreate,
   StacksMore,
   GroupCreate,
+  TeacherCreate,
+  StudentCreate,
+  StudentMore,
+  TeacherMore,
 };

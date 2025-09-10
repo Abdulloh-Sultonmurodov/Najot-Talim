@@ -25,10 +25,10 @@ const GroupCreate = () => {
       .get("/stacks")
       .then((res) => {
         setStacks(
-          res.data.data.map((item: StackType) => {
-            item.label = item.name;
-            item.value = item.id;
-          })
+          res.data.data.map((item: StackType) => ({
+            label: item.name,
+            value: item.id,
+          }))
         );
       });
   }, []);
@@ -38,7 +38,7 @@ const GroupCreate = () => {
   const [rooms, setRooms] = useState<{ value: string; label: string }[]>([]);
   useEffect(() => {
     instance()
-      .get("/stacks")
+      .get("/rooms")
       .then((res) => {
         setRooms(
           res.data.data.map((item: RoomsType) => {
@@ -107,10 +107,9 @@ const GroupCreate = () => {
       .then(() => {
         toast.success("Muvaffaqiyatli qo'shildi!", {
           onClose: () => {
-            setLoading(false);
             navigate(-1);
           },
-          autoClose: 1000,
+          autoClose: 700,
         });
       })
       .finally(() => {
@@ -125,13 +124,13 @@ const GroupCreate = () => {
         <div className="w-[48%] flex flex-col gap-5">
           <Select
             onChange={(e) => setStackId(e)}
-            className="!w-[300px]"
+            className="!w-full"
             size="large"
             allowClear
             showSearch
             placeholder="Yo'nalish tanlang"
             optionFilterProp="label"
-            options={[stacks]}
+            options={stacks}
           />
           <Select
             onChange={(e) => setTeacherId(e)}
@@ -141,7 +140,7 @@ const GroupCreate = () => {
             showSearch
             placeholder="Ustoz tanlang"
             optionFilterProp="label"
-            options={[teachers]}
+            options={teachers}
           />
           <Select
             onChange={(e) => setSupportTeacherId(e)}
@@ -151,10 +150,10 @@ const GroupCreate = () => {
             showSearch
             placeholder="Yordamchi ustoz tanlang"
             optionFilterProp="label"
-            options={[supportTeacher]}
+            options={supportTeacher}
           />
         </div>
-        <div className="w-[48%]">
+        <div className="w-[48%] flex flex-col gap-5">
           <Input
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -164,13 +163,13 @@ const GroupCreate = () => {
           />
           <Select
             onChange={(e) => setRoomId(e)}
-            className="!w-[300px]"
+            className="!w-full"
             size="large"
             allowClear
             showSearch
             placeholder="Xona tanlang"
             optionFilterProp="label"
-            options={[rooms]}
+            options={rooms}
           />
         </div>
       </div>
