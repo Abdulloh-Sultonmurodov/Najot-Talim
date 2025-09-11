@@ -12,20 +12,20 @@ const TeacherCreate = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [name, setName] = useState<string>("");
-  const [surname, setSurname] = useState<string>("");
-  const [age, setAge] = useState<string>("");
-  const [stackId, setStackId] = useState<string>();
-  const [regionId, setRegionId] = useState<string>();
+  const [name, setName] = useState<string>();
+  const [surname, setSurname] = useState<string>();
+  const [age, setAge] = useState<number | string>();
+  const [stackId, setStackId] = useState<number | string>();
+  const [regionId, setRegionId] = useState<number | string>();
   const [district, setDistrict] = useState<string>();
-  const [statusId, setStatusId] = useState<string>();
+  const [statusId, setStatusId] = useState<number | string>();
   const [experience, setExperience] = useState<string>();
   const [gender, setGender] = useState<string>();
   const [email, setEmail] = useState<string>();
-  const [phone, setPhone] = useState<string>();
+  const [phone, setPhone] = useState<number | string>();
   const [study, setStudy] = useState<string>();
   const [isMerried, setIsMerried] = useState<string>();
-  const [workCompanyIds, setWorkCompanyIds] = useState<string>();
+  const [workCompanyIds, setWorkCompanyIds] = useState<number | string>();
 
   // Stack get all start
   const [stacks, setStacks] = useState<{ label: string; value: string }[]>([]);
@@ -124,11 +124,13 @@ const TeacherCreate = () => {
         .then(() => {
           toast.success("Muvaffaqatli o'zgartirildi!", {
             onClose: () => {
-              setLoading(false);
               navigate(-1);
             },
             autoClose: 1000,
           });
+        })
+        .finally(() => {
+          setLoading(false);
         });
     } else {
       instance()

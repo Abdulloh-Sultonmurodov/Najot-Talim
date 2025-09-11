@@ -36,6 +36,7 @@ const DashboardRoutes = () => {
     { id: 13, path: PATH.teachersCreate, element: <TeacherCreate /> },
     { id: 14, path: PATH.teachersUpdate, element: <TeacherCreate /> },
     { id: 15, path: PATH.teachersMore, element: <TeacherMore /> },
+    { id: 16, path: PATH.groupsMore, element: <GroupCreate /> },
   ];
 
   return (

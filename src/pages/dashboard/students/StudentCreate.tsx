@@ -11,15 +11,15 @@ const StudentCreate = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [name, setName] = useState<string>("");
-  const [surname, setSurname] = useState<string>("");
-  const [age, setAge] = useState<string>("");
-  const [studentId, setStudentId] = useState<string>("");
-  const [groupId, setGroupId] = useState<string>("");
-  const [regionId, setRegionId] = useState<string>();
+  const [name, setName] = useState<string>();
+  const [surname, setSurname] = useState<string>();
+  const [age, setAge] = useState<number | string>();
+  const [studentId, setStudentId] = useState<number | string>();
+  const [groupId, setGroupId] = useState<number | string>();
+  const [regionId, setRegionId] = useState<number | string>();
   const [district, setDistrict] = useState<string>();
   const [study, setStudy] = useState<string>();
-  const [phone, setPhone] = useState<string>();
+  const [phone, setPhone] = useState<number | string>();
   const [email, setEmail] = useState<string>();
 
   // Region get all start
@@ -32,9 +32,10 @@ const StudentCreate = () => {
       .then((res) => {
         setRegions(
           res.data.data.map((item: RegionType) => {
-            item.label = item.name;
-            item.value = item.id;
-            return item;
+            return {
+              label: item.name,
+              value: item.id,
+            };
           })
         );
       });
@@ -62,11 +63,13 @@ const StudentCreate = () => {
         .then(() => {
           toast.success("Muvaffaqatli o'zgartirildi!", {
             onClose: () => {
-              setLoading(false);
               navigate(-1);
             },
             autoClose: 1000,
           });
+        })
+        .finally(() => {
+          setLoading(false);
         });
     } else {
       instance()
@@ -74,11 +77,13 @@ const StudentCreate = () => {
         .then(() => {
           toast.success("Muvaffaqiyatli qo'shildi", {
             onClose: () => {
-              setLoading(false);
               navigate(-1);
             },
-            autoClose: 700,
+            autoClose: 1000,
           });
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   }

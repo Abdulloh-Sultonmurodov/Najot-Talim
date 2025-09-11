@@ -27,12 +27,14 @@ const TeacherMore = () => {
       .then(() => {
         toast.success("O'chirildi!", {
           onClose: () => {
-            setDeleteLoading(false);
-            setDeleteModal(false);
             navigate(-1);
           },
           autoClose: 1000,
         });
+      })
+      .finally(() => {
+        setDeleteModal(false);
+        setDeleteLoading(false);
       });
   }
   //   Delete part end
@@ -57,7 +59,7 @@ const TeacherMore = () => {
         </div>
         <div className="flex items-center gap-5">
           <Button
-            onClick={handleDelete}
+            onClick={() => handleDelete()}
             className="!bg-red-500"
             size="large"
             type="primary"

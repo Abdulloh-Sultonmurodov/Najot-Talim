@@ -3,6 +3,7 @@ const PATH = {
   login: "/sign-in",
   groups: "/groups",
   groupsCreate: "/groups/create",
+  groupsMore: "/groups/:id",
   teachers: "/teachers",
   teachersCreate: "/teachers/create",
   teachersUpdate: "/teachers/:id/update",

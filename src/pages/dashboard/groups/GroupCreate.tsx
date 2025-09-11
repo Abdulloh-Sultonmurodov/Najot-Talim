@@ -5,11 +5,12 @@ import { instance } from "../../../hooks";
 import type { StackType } from "../../../@types/StackType";
 import type { RoomsType } from "../../../@types/RoomsType";
 import type { TeacherType } from "../../../@types/TeacherType";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const GroupCreate = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [loading, setLoading] = useState<boolean>(false);
 
   const [name, setName] = useState<string>("");
@@ -102,20 +103,51 @@ const GroupCreate = () => {
       mainTeacherIds: [teacherId],
       supportTeacherIds: [supportTeacherId],
     };
-    instance()
-      .post("/groups", data)
-      .then(() => {
-        toast.success("Muvaffaqiyatli qo'shildi!", {
-          onClose: () => {
-            navigate(-1);
-          },
-          autoClose: 700,
+    if (id) {
+      instance()
+        .patch(`/groups/${id}`, data)
+        .then(() => {
+          toast.success("Muvaffaqatli o'zgartirildi!", {
+            onClose: () => {
+              navigate(-1);
+            },
+            autoClose: 1000,
+          });
+        })
+        .finally(() => {
+          setLoading(false);
         });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    } else {
+      instance()
+        .post("/groups", data)
+        .then(() => {
+          toast.success("Muvaffaqiyatli qo'shildi!", {
+            onClose: () => {
+              navigate(-1);
+            },
+            autoClose: 700,
+          });
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   }
+
+  useEffect(() => {
+    if (id) {
+      instance()
+        .get(`/students/${id}`)
+        .then((res) => {
+          setStacks(res.data.stack);
+          setTeachers(res.data.teachers);
+          setSupportTeacher(res.data.supportTeachers);
+          setName(res.data.name);
+          setStackId(res.data.stackId);
+          setRoomId(res.data.roomId);
+        });
+    }
+  }, []);
 
   return (
     <form onSubmit={handleCreateGroup} autoComplete="off" className="p-5">

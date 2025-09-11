@@ -1,23 +1,23 @@
 import { ArrowLeftOutlined, DeleteFilled, EditFilled } from "@ant-design/icons";
+import { Button, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { instance } from "../../../hooks";
-import type { StudentType } from "../../../@types/StudentType";
-import { Button, Modal } from "antd";
 import { toast } from "react-toastify";
+import type { GroupsType } from "../../../@types/GroupsType";
 
-const StudentMore = () => {
+const GroupMore = () => {
   const navigate = useNavigate();
-  const [studentData, setStudentData] = useState<StudentType>();
+  const [groupData, setGroupData] = useState<GroupsType>();
   const { id } = useParams();
   const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
   //   Shu stack Id ga teng bo'lgan Stackni, singleStack get all
   useEffect(() => {
     instance()
-      .get(`/students/${id}`)
+      .get(`/groups/${id}`)
       .then((res) => {
-        setStudentData(res.data);
+        setGroupData(res.data);
       });
   }, []);
 
@@ -32,7 +32,7 @@ const StudentMore = () => {
   function handleDeleteStudent() {
     setDeleteLoading(true);
     instance()
-      .delete(`/students/${deleteId}`)
+      .delete(`/groups/${deleteId}`)
       .then(() => {
         toast.success("O'chirildi!", {
           onClose: () => {
@@ -80,91 +80,49 @@ const StudentMore = () => {
         <div className="space-y-5">
           <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
             ID:{" "}
-            <span className="font-bold text-[#bc8e5b]">{studentData?.id}</span>
+            <span className="font-bold text-[#bc8e5b]">{groupData?.id}</span>
           </p>
           <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            O'quvchi IDsi:{" "}
+            Yo'nalish IDsi:{" "}
             <span className="font-bold text-[#bc8e5b]">
-              {studentData?.studentId}
+              {groupData?.stackId}
             </span>
           </p>
           <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
             Ismi:{" "}
+            <span className="font-bold text-[#bc8e5b]">{groupData?.name}</span>
+          </p>
+          <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
+            Holati:{" "}
             <span className="font-bold text-[#bc8e5b]">
-              {studentData?.name}
+              {groupData?.status}
             </span>
           </p>
           <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            Familiyasi:{" "}
+            Xona IDsi:{" "}
             <span className="font-bold text-[#bc8e5b]">
-              {studentData?.surname}
+              {groupData?.roomId}
             </span>
           </p>
           <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            Yoshi:{" "}
-            <span className="font-bold text-[#bc8e5b]">{studentData?.age}</span>
-          </p>
-          <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            Viloyat:{" "}
+            Yo'nalish nomi:{" "}
             <span className="font-bold text-[#bc8e5b]">
-              {studentData?.region.name}
+              {groupData?.stack.name}
             </span>
           </p>
           <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            Viloyat IDsi:{" "}
+            Xona nomi:{" "}
             <span className="font-bold text-[#bc8e5b]">
-              {studentData?.regionId}
-            </span>
-          </p>
-          <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            Tuman:{" "}
-            <span className="font-bold text-[#bc8e5b]">
-              {studentData?.district}
+              {groupData?.room.name}
             </span>
           </p>
         </div>
         <div className="space-y-5">
           <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            O'qish:{" "}
-            <span className="font-bold text-[#bc8e5b]">
-              {studentData?.study}
-            </span>
-          </p>
-          <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            Telefon raqami:{" "}
-            <span className="font-bold text-[#bc8e5b]">
-              {studentData?.phone}
-            </span>
-          </p>
-          <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            Email:{" "}
-            <span className="font-bold text-[#bc8e5b]">
-              {studentData?.email}
-            </span>
-          </p>
-          <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            Holati:{" "}
-            <span className="font-bold text-[#bc8e5b]">
-              {studentData?.status}
-            </span>
-          </p>
-          <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            Gurux:{" "}
-            <span className="font-bold text-[#bc8e5b]">
-              {studentData?.group.name}
-            </span>
-          </p>
-          <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
-            Gurux IDsi:{" "}
-            <span className="font-bold text-[#bc8e5b]">
-              {studentData?.groupId}
-            </span>
-          </p>
-          <p className="border-[1px] w-[350px] rounded-md p-2 font-semibold flex justify-between">
             Yaratilgan vaqti:{" "}
             <span className="font-bold text-[#bc8e5b]">
-              {studentData?.createdAt.split("T")[0].split(".")[0]} /{" "}
-              {studentData?.createdAt.split("T")[1].split(".")[0]}
+              {groupData?.createdAt.split("T")[0].split(".")[0]} /{" "}
+              {groupData?.createdAt.split("T")[1].split(".")[0]}
             </span>
           </p>
         </div>
@@ -183,4 +141,4 @@ const StudentMore = () => {
   );
 };
 
-export default StudentMore;
+export default GroupMore;

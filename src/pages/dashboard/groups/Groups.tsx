@@ -6,8 +6,10 @@ import { MoreOutlined } from "@ant-design/icons";
 import type { GroupsType } from "../../../@types/GroupsType";
 import type { TeacherType } from "../../../@types/TeacherType";
 import type { StackType } from "../../../@types/StackType";
+import { useNavigate } from "react-router-dom";
 
 const Groups = () => {
+  const navigate = useNavigate();
   const column = [
     { title: "ID", dataIndex: "key" },
     { title: "Gurux nomi", dataIndex: "name" },
@@ -61,6 +63,7 @@ const Groups = () => {
             item.stackName = item.stack.name;
             item.action = (
               <Button
+                onClick={() => navigate(`${item.id}`)}
                 size="middle"
                 icon={<MoreOutlined className="!text-[18px]" />}
                 type="primary"
